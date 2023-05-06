@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -13,8 +12,7 @@ import com.maratonaJSF.models.Empresa;
 public class Empresas implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	@Inject
+
 	private EntityManager manager;
 
 	public Empresas() {
