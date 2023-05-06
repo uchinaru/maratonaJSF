@@ -27,7 +27,7 @@ public class CamadaPersistencia {
         // Buscando as informações do banco
         List<RamoAtividade> listaDeRamoAtividades = ramoAtividades.pesquisar("");
         List<Empresa> listaDeEmpresas = empresas.pesquisar("");
-        System.out.println(listaDeEmpresas);
+        System.out.println("Empresas antes do save: " + listaDeEmpresas);
 
         // Criando uma empresa
         Empresa empresa = new Empresa();
@@ -45,7 +45,7 @@ public class CamadaPersistencia {
 
         // Verificando se a inserção funcionou
         List<Empresa> listaDeEmpresas2 = empresas.pesquisar("");
-        System.out.println(listaDeEmpresas2);
+        System.out.println("Empresas depois do save: " +listaDeEmpresas2);
 
         em.close();
         emf.close();

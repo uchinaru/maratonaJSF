@@ -3,8 +3,10 @@ package com.maratonaJSF.repository;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -14,7 +16,8 @@ import com.maratonaJSF.models.RamoAtividade;
 public class RamoAtividades implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@Inject
 	private EntityManager manager;
 
 	public RamoAtividades() {
@@ -34,7 +37,7 @@ public class RamoAtividades implements Serializable {
 
 		criteriaQuery.where(criteriaBuilder.like(root.get("descricao"), descricao + "%"));
 		
-		Query query = manager.createQuery(criteriaQuery);
+		TypedQuery<RamoAtividade> query = manager.createQuery(criteriaQuery);
 		
 		return query.getResultList();
 	}
