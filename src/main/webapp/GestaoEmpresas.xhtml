@@ -18,22 +18,20 @@
 			<!-- para se comunicar com o back-end -->
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Razao Social:" for="razaoSocial" />
-				<h:inputText id="razaoSocial" />
+				<h:inputText id="razaoSocial" value="#{gestaoEmpresaBean.empresa.razaoSocial}"/>
 
 				<h:outputLabel value="Nome fantasia:" for="nomeFantasia" />
-				<h:inputText id="nomeFantasia" />
+				<h:inputText id="nomeFantasia" value="#{gestaoEmpresaBean.empresa.nomeFantasia}"/>
 
 				<h:outputLabel value="Tipo Empresa:" for="tipo" />
-				<h:selectOneMenu id="tipo">
-					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItem itemLabel="MEI" itemValue="MEI" />
-					<f:selectItem itemLabel="LTDA" itemValue="LTDA" />
-					<f:selectItem itemLabel="EIRELI" itemValue="EIRELI" />
-					<f:selectItem itemLabel="SA" itemValue="SA" />
+				<h:selectOneMenu id="tipo" value="#{gestaoEmpresaBean.empresa.tipo}">
+					<f:selectItem itemLabel="Selecione..." itemValue="" />
+					<f:selectItems value="#{gestaoEmpresaBean.tiposEmpresas}" 
+					var="tipoEmpresa" itemLabel="#{tipoEmpresa.descricao}" itemValue="#{tipoEmpresa}" />
 				</h:selectOneMenu>
 
 				<h:outputLabel />
-				<h:commandButton value="Salvar" />
+				<h:commandButton value="Salvar" actionListener="#{gestaoEmpresaBean.salvar}"/>
 			</h:panelGrid>
 
 			<h:dataTable value="#{[ 0, 0, 0]}">
