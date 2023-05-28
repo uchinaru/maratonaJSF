@@ -22,27 +22,35 @@
 	<H2>Cadastro de empresas</H2>
 		
 		<div id="conteudo">
-			<p:dataTable var="empresa" value="#{gestaoEmpresaBean.listaEmpresas}" emptyMessage="Nenhuma informação encontrada">
-				<f:facet name="header">
-					Lista de empresas
-				</f:facet>
-					<p:column headerText="Razão Social:">
-						<h:outputText value="#{empresa.razaoSocial}"/>
-					</p:column>
-					<p:column headerText="Nome Fantasia:">
-						<h:outputText value="#{empresa.nomeFantasia}"/>
-					</p:column>
-					<p:column headerText="Tipo Empresa:">
-						<h:outputText value="#{empresa.tipo}"/>
-					</p:column>
-					<p:column headerText="Ramo Atividade:">
-						<h:outputText value="#{empresa.ramoAtividade.descricao}"/>
-					</p:column>
-					
-					<f:facet name="footer">
-						<span class="font-bold">Total Empresas: #{gestaoEmpresaBean.totalEmp} </span>
+			<h:form>
+				<p:dataTable 
+				var="empresa" 
+				value="#{gestaoEmpresaBean.listaEmpresas}" 
+				emptyMessage="Nenhuma informação encontrada"
+				paginator="true" 
+				paginatorPosition="bottom"
+				rows="10">
+					<f:facet name="header">
+						Lista de empresas
 					</f:facet>
-			</p:dataTable>
+						<p:column headerText="Razão Social:" sortBy="#{empresa.razaoSocial}">
+							<h:outputText value="#{empresa.razaoSocial}"/>
+						</p:column>
+						<p:column headerText="Nome Fantasia:" sortBy="#{empresa.nomeFantasia}">
+							<h:outputText value="#{empresa.nomeFantasia}"/>
+						</p:column>
+						<p:column headerText="Tipo Empresa:" sortBy="#{empresa.tipo}">
+							<h:outputText value="#{empresa.tipo}"/>
+						</p:column>
+						<p:column headerText="Ramo Atividade:" sortBy="#{empresa.ramoAtividade.descricao}">
+							<h:outputText value="#{empresa.ramoAtividade.descricao}"/>
+						</p:column>
+						
+						<f:facet name="footer">
+							<span class="font-bold">Total Empresas: #{gestaoEmpresaBean.totalEmp} </span>
+						</f:facet>
+				</p:dataTable>
+			</h:form>
 		</div>
 
 	<footer> Curso online "JSF e PrimeFaces Essencial" </footer>
