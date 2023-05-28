@@ -27,6 +27,7 @@ public class RamoAtividades implements Serializable {
 		this.manager = manager;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<RamoAtividade> pesquisar(String descricao) {
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
 		CriteriaQuery<RamoAtividade> criteriaQuery = criteriaBuilder.createQuery(RamoAtividade.class);
