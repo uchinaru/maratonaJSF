@@ -1,15 +1,14 @@
 package com.maratonaJSF.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.maratonaJSF.models.Empresa;
-import com.maratonaJSF.models.TipoEmpresa;
+import com.maratonaJSF.repository.Empresas;
 
 @Named
 // @RequestScoped // inicia por requisão post, ao acessar ou enviar requições tais como click de buttons.
@@ -20,24 +19,27 @@ public class GestaoEmpresaBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Empresa empresa = new Empresa();
+	@Inject
+	private Empresas empresas;
+	private int totalEmp = 0;
 	
-	public void salvar() {
-		System.out.println("Razão Social: " + empresa.getRazaoSocial() + 
-				" - Nome fantasia: " + empresa.getNomeFantasia() 
-				+" - Tipo Empresa: " + empresa.getTipo());
+	private List<Empresa> listaEmpresas;
+	
+	public void carregaEmpresas() {
+		listaEmpresas = empresas.carregaEmpresas();
+		totalEmp = listaEmpresas.size();
 	}
-	
-	public String ajuda() {
-		return "AjudaGestaoEmpresas?faces-redirect=true";
+
+	public List<Empresa> getListaEmpresas() {
+		return listaEmpresas;
 	}
-	
-	public Empresa getEmpresa() {
-		return empresa;
+
+	public int getTotalEmp() {
+		return totalEmp;
 	}
-	
-	public TipoEmpresa[] getTiposEmpresas() {
-		return TipoEmpresa.values();
+
+	public void setTotalEmp(int totalEmp) {
+		this.totalEmp = totalEmp;
 	}
-	
+
 }
