@@ -7,13 +7,28 @@
 	template="WEB-INF/template/layout.xhtml">
 	
 	<ui:define name="titulo"> Cadastro de Empresas </ui:define>
-
+	
 	<ui:define name="conteudo">
 		<f:metadata>
 			<f:viewAction action="#{gestaoEmpresaBean.carregaEmpresas}" />
 		</f:metadata>
 
 		<h:form>
+			
+			<p:toolbar>
+				<f:facet name="left">
+					<p:inputText placeholder="Digite para pesquisar" size="15"/>
+					<p:commandButton value="Pesquisar" icon="fa fa-search"/>
+					<p:commandButton value="Nova" icon="fa fa-plus"/>
+					<p:commandButton value="Editar" icon="fa fa-pencil"/>
+					<p:commandButton value="Excluir" icon="fa fa-trash"/>
+					<p:commandButton value="Exportar Excel" icon="fa fa-file-excel-o"/>
+					
+				</f:facet>
+			</p:toolbar>
+			
+			<p:spacer/>
+			
 			<p:dataTable var="empresa" value="#{gestaoEmpresaBean.listaEmpresas}"
 				emptyMessage="Nenhuma informação encontrada" paginator="true"
 				paginatorPosition="bottom" rows="10">
