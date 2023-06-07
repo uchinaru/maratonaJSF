@@ -3,12 +3,14 @@ package com.maratonaJSF.controller;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.maratonaJSF.models.Empresa;
 import com.maratonaJSF.repository.Empresas;
+import com.maratonaJSF.util.FacesMessages;
 
 @Named
 // @RequestScoped // inicia por requisão post, ao acessar ou enviar requições tais como click de buttons.
@@ -21,7 +23,11 @@ public class GestaoEmpresaBean implements Serializable{
 	
 	@Inject
 	private Empresas empresas;
+	
 	private int totalEmp = 0;
+	
+	@Inject
+	private FacesMessages messages;
 	
 	private List<Empresa> listaEmpresas;
 	
@@ -29,11 +35,21 @@ public class GestaoEmpresaBean implements Serializable{
 		listaEmpresas = empresas.carregaEmpresas();
 		totalEmp = listaEmpresas.size();
 	}
+	
+	private String termoPesquisa;
 
 	public List<Empresa> getListaEmpresas() {
 		return listaEmpresas;
 	}
 
+	public void pesquisar() {
+		listaEmpresas = empresas.pesquisar(termoPesquisa);
+		
+		if (listaEmpresas.isEmpty()) {
+			messages.info("Sem dados para exibir nesta pesquisa");
+		}
+	}
+	
 	public int getTotalEmp() {
 		return totalEmp;
 	}
@@ -41,5 +57,12 @@ public class GestaoEmpresaBean implements Serializable{
 	public void setTotalEmp(int totalEmp) {
 		this.totalEmp = totalEmp;
 	}
-
+	
+	public String getTermoPesquisa() {
+		return termoPesquisa;
+	}
+	
+	public void setTermoPesquisa(String termoPesquisa) {
+		this.termoPesquisa = termoPesquisa;
+	}
 }

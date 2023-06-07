@@ -14,11 +14,12 @@
 		</f:metadata>
 
 		<h:form>
+			<p:messages autoUpdate="true"/>
 			
 			<p:toolbar>
 				<f:facet name="left">
-					<p:inputText placeholder="Digite para pesquisar" size="15"/>
-					<p:commandButton value="Pesquisar" icon="fa fa-search"/>
+					<p:inputText placeholder="Digite para pesquisar" size="15" value="#{gestaoEmpresaBean.termoPesquisa}" />
+					<p:commandButton value="Pesquisar" icon="fa fa-search" actionListener="#{gestaoEmpresaBean.pesquisar}" update="empresasDataTable"/>
 					<p:commandButton value="Nova" icon="fa fa-plus"/>
 					<p:commandButton value="Editar" icon="fa fa-pencil"/>
 					<p:commandButton value="Excluir" icon="fa fa-trash"/>
@@ -29,7 +30,7 @@
 			
 			<p:spacer/>
 			
-			<p:dataTable var="empresa" value="#{gestaoEmpresaBean.listaEmpresas}"
+			<p:dataTable id="empresasDataTable" var="empresa" value="#{gestaoEmpresaBean.listaEmpresas}"
 				emptyMessage="Nenhuma informação encontrada" paginator="true"
 				paginatorPosition="bottom" rows="10">
 				<f:facet name="header">
