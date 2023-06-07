@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.maratonaJSF.models.Empresa;
+import com.maratonaJSF.models.TipoEmpresa;
 import com.maratonaJSF.repository.Empresas;
 import com.maratonaJSF.util.FacesMessages;
 
@@ -44,10 +45,15 @@ public class GestaoEmpresaBean implements Serializable{
 
 	public void pesquisar() {
 		listaEmpresas = empresas.pesquisar(termoPesquisa);
+		totalEmp = listaEmpresas.size();
 		
 		if (listaEmpresas.isEmpty()) {
 			messages.info("Sem dados para exibir nesta pesquisa");
 		}
+	}
+	
+	public TipoEmpresa[] getTiposEmpresa() {
+		return TipoEmpresa.values();
 	}
 	
 	public int getTotalEmp() {
