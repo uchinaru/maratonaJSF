@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.convert.Converter;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.maratonaJSF.models.Empresa;
+import com.maratonaJSF.models.RamoAtividade;
 import com.maratonaJSF.models.TipoEmpresa;
 import com.maratonaJSF.repository.Empresas;
+import com.maratonaJSF.repository.RamoAtividades;
 import com.maratonaJSF.util.FacesMessages;
 
 @Named
@@ -24,12 +27,12 @@ public class GestaoEmpresaBean implements Serializable{
 	
 	@Inject
 	private Empresas empresas;
-	
-	private int totalEmp = 0;
-	
 	@Inject
 	private FacesMessages messages;
-	
+	@Inject
+	private RamoAtividades ramoAtividades;
+	private int totalEmp = 0;
+	private Converter RamoAtividadeConverter;
 	private List<Empresa> listaEmpresas;
 	
 	public void carregaEmpresas() {
@@ -56,6 +59,14 @@ public class GestaoEmpresaBean implements Serializable{
 		return TipoEmpresa.values();
 	}
 	
+	public List<RamoAtividade> completarRamoAtividade(String termo){
+		
+		List<RamoAtividade> listaRamoAtividade = ramoAtividades.pesquisar(termo);
+		RamoAtividadeConverter = new RamoAtividadeConverter(listaRamoAtividade);
+		
+		return listaRamoAtividade;
+	}
+	
 	public int getTotalEmp() {
 		return totalEmp;
 	}
@@ -71,4 +82,14 @@ public class GestaoEmpresaBean implements Serializable{
 	public void setTermoPesquisa(String termoPesquisa) {
 		this.termoPesquisa = termoPesquisa;
 	}
+
+	public Converter getRamoAtividadeConverter() {
+		return RamoAtividadeConverter;
+	}
+
+	public void setRamoAtividadeConverter(Converter ramoAtividadeConverter) {
+		RamoAtividadeConverter = ramoAtividadeConverter;
+	}
+	
+	
 }

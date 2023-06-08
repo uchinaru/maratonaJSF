@@ -78,8 +78,15 @@
 					<p:calendar id="dataFundacao" pattern="dd/MM/yyyy" size="30" locale="pt_BR"/>
 					
 					<p:outputLabel value="Ramo Atividade: " for="ramoAtividade" />
-					<p:autoComplete id="ramoAtividade" size="80"/>
-					
+					<p:autoComplete 
+						id="ramoAtividade"
+						 size="80" 
+						 completeMethod="#{gestaoEmpresaBean.completarRamoAtividade}" 
+						 converter="#{gestaoEmpresaBean.ramoAtividadeConverter}"
+						 var="ramoAtividade"
+						 itemLabel="#{ramoAtividade.descricao}"
+						 itemValue="#{ramoAtividade}"
+						 />
 					<h:outputLabel/>
 					<p:commandButton value="Salvar"/>
 				</p:panelGrid>
