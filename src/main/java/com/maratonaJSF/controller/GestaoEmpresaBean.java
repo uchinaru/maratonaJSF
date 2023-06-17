@@ -2,18 +2,16 @@ package com.maratonaJSF.controller;
 
 import java.io.Serializable;
 import java.util.List;
-
-import javax.faces.application.FacesMessage;
 import javax.faces.convert.Converter;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import com.maratonaJSF.models.Empresa;
 import com.maratonaJSF.models.RamoAtividade;
 import com.maratonaJSF.models.TipoEmpresa;
 import com.maratonaJSF.repository.Empresas;
 import com.maratonaJSF.repository.RamoAtividades;
+import com.maratonaJSF.service.CadastroEmpresaService;
 import com.maratonaJSF.util.FacesMessages;
 
 @Named
@@ -34,6 +32,25 @@ public class GestaoEmpresaBean implements Serializable{
 	private int totalEmp = 0;
 	private Converter RamoAtividadeConverter;
 	private List<Empresa> listaEmpresas;
+	private Empresa empresa;
+	
+	@Inject
+	private CadastroEmpresaService cadastroEmpresaService;
+	
+	public void prepararNovaEmpresa() {
+		empresa = new Empresa();
+		
+		System.out.println("AAAA " + empresa.toString());
+	}
+	
+	public void salvar() {
+		cadastroEmpresaService.salvar(empresa);
+		
+		if (jaHouvePesquisa()) {
+			pesquisar();
+		}
+		messages.info("Cadastros efetuado com sucesso");
+	}
 	
 	public void carregaEmpresas() {
 		listaEmpresas = empresas.carregaEmpresas();
@@ -67,6 +84,10 @@ public class GestaoEmpresaBean implements Serializable{
 		return listaRamoAtividade;
 	}
 	
+	private boolean jaHouvePesquisa() {
+		return termoPesquisa != null && !"".equals(termoPesquisa);
+	}
+	
 	public int getTotalEmp() {
 		return totalEmp;
 	}
@@ -90,6 +111,13 @@ public class GestaoEmpresaBean implements Serializable{
 	public void setRamoAtividadeConverter(Converter ramoAtividadeConverter) {
 		RamoAtividadeConverter = ramoAtividadeConverter;
 	}
-	
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
 	
 }
